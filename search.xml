@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[test]]></title>
-    <url>%2F2019%2F07%2F18%2Ftest%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
-    <title></title>
+    <title><![CDATA[文献收集测试]]></title>
     <url>%2F2019%2F07%2F18%2FPaper%2F</url>
     <content type="text"><![CDATA[胁迫、转座子与表观修饰 In planta chromatin immunoprecipitation in Zymoseptoria tritici reveals chromatin-based regulation of putative effector gene expression 2019 BioRxiv 转座子与表观修饰：TE and H3K4me2、H3K27me3、H3K9me3 Stress-driven transposable element de-repression dynamics in a fungal pathogen 2019 BioRxiv 转座子表达与胁迫：MITE and LTR-Gypsy elements Low temperature triggers genome-wide hypermethylation of transposable elements and centromeres in maize 2019 BioRxiv 玉米中低温诱导转座子 DNA 高甲基化 Excess light priming in Arabidopsis thaliana with altered DNA methylomes 2019 Biorxiv DNA甲基化组的维持受损，但对重复的过量光的光保护和引发是有效的 Immune receptor genes and pericentromeric transposons as targets of common epigenetic regulatory elements 2018 Plant Journal 拟南芥：sRNAs 可以控制 PRR / NLR 基因和远端的 pericentromeric TEs，并在它们被激活时优先使 TEs 沉默 DNA甲基化 The Catalytic Core of DEMETER Guides Active DNA Demethylation in Arabidopsis 2019 Biorxiv 拟南芥：DME Seed genome hypomethylated regions are enriched in transcription factor genes 2018 PNAS DNA甲基化低的区域有转录因子的富集： hypomethylated regions, or DNA methylation valleys (DMVs) DNA 甲基化、组蛋白（去）乙酰化、转座子、转录因子 Distinct Contribution of DNA Methylation and Histone Acetylation to the Genomic Occupancy of Transcription Factors 人：2019 BioRxiv 在 DNA 甲基化缺失的细胞中 HDAC 的抑制效果显著增加，DNA甲基化和组蛋白去乙酰化在很大程度上独立地抑制转录因子结合和基因表达]]></content>
+      <categories>
+        <category>文章</category>
+      </categories>
+      <tags>
+        <tag>组蛋白</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Hello World]]></title>

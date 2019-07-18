@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-18T13:50:53.786Z</updated>
+  <updated>2019-07-18T14:03:53.377Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,25 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test</title>
-    <link href="http://yoursite.com/2019/07/18/test/"/>
-    <id>http://yoursite.com/2019/07/18/test/</id>
-    <published>2019-07-18T13:50:35.000Z</published>
-    <updated>2019-07-18T13:50:53.786Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
+    <title>文献收集测试</title>
     <link href="http://yoursite.com/2019/07/18/Paper/"/>
     <id>http://yoursite.com/2019/07/18/Paper/</id>
     <published>2019-07-18T13:05:41.014Z</published>
-    <updated>2019-07-18T13:28:40.123Z</updated>
+    <updated>2019-07-18T14:03:53.377Z</updated>
     
     <content type="html"><![CDATA[<h3 id="胁迫、转座子与表观修饰"><a href="#胁迫、转座子与表观修饰" class="headerlink" title="胁迫、转座子与表观修饰"></a>胁迫、转座子与表观修饰</h3><ul><li><p><a href="https://www.biorxiv.org/content/10.1101/544627v1" target="_blank" rel="noopener">In planta chromatin immunoprecipitation in Zymoseptoria tritici reveals chromatin-based regulation of putative effector gene expression</a></p><blockquote><p>2019 BioRxiv 转座子与表观修饰：TE and H3K4me2、H3K27me3、H3K9me3</p></blockquote></li><li><p><a href="https://www.biorxiv.org/content/10.1101/633693v1" target="_blank" rel="noopener">Stress-driven transposable element de-repression dynamics in a fungal pathogen</a></p><blockquote><p>2019 BioRxiv 转座子表达与胁迫：MITE and LTR-<em>Gypsy</em> elements</p></blockquote></li><li><p><a href="https://www.biorxiv.org/content/10.1101/573915v1" target="_blank" rel="noopener">Low temperature triggers genome-wide hypermethylation of transposable elements and centromeres in maize</a></p><blockquote><p>2019 BioRxiv 玉米中低温诱导转座子 DNA 高甲基化</p></blockquote></li><li><p><a href="https://www.biorxiv.org/content/10.1101/475798v2" target="_blank" rel="noopener">Excess light priming in <em>Arabidopsis thaliana</em> with altered DNA methylomes</a></p><blockquote><p>2019 Biorxiv DNA甲基化组的维持受损，但对重复的过量光的光保护和引发是有效的</p></blockquote></li><li><p><a href="https://onlinelibrary.wiley.com/doi/full/10.1111/tpj.14098" target="_blank" rel="noopener">Immune receptor genes and pericentromeric transposons as targets of common epigenetic regulatory elements</a></p><blockquote><p>2018 <a href="https://www.x-mol.com/paper/0/1036" target="_blank" rel="noopener"><em>Plant Journal</em></a>  拟南芥：sRNAs 可以控制 PRR / NLR 基因和远端的 pericentromeric TEs，并在它们被激活时优先使 TEs 沉默<img src="https://onlinelibrary.wiley.com/cms/attachment/f69a7073-b95a-45e5-af47-d494bd857409/tpj14098-fig-0006-m.jpg" alt> </p></blockquote></li></ul><h3 id="DNA甲基化"><a href="#DNA甲基化" class="headerlink" title="DNA甲基化"></a>DNA甲基化</h3><ul><li><p><a href="https://www.biorxiv.org/content/10.1101/623843v1" target="_blank" rel="noopener">The Catalytic Core of DEMETER Guides Active DNA Demethylation in Arabidopsis</a> </p><blockquote><p>2019 Biorxiv 拟南芥：DME<img src="https://raw.githubusercontent.com/qliugithub/PicGo/master/2019-BioRxiv-%E6%8B%9F%E5%8D%97%E8%8A%A5DME.jpg" alt></p></blockquote></li><li><p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6126732/" target="_blank" rel="noopener">Seed genome hypomethylated regions are enriched in transcription factor genes</a></p><blockquote><p>2018 PNAS DNA甲基化低的区域有转录因子的富集： hypomethylated regions, or DNA methylation valleys (DMVs)<img src="https://raw.githubusercontent.com/qliugithub/PicGo/master/DMV" alt></p></blockquote></li></ul><h3 id="DNA-甲基化、组蛋白（去）乙酰化、转座子、转录因子"><a href="#DNA-甲基化、组蛋白（去）乙酰化、转座子、转录因子" class="headerlink" title="DNA 甲基化、组蛋白（去）乙酰化、转座子、转录因子"></a>DNA 甲基化、组蛋白（去）乙酰化、转座子、转录因子</h3><ul><li><p><a href="https://www.biorxiv.org/content/10.1101/670307v1" target="_blank" rel="noopener">Distinct Contribution of DNA Methylation and Histone Acetylation to the Genomic Occupancy of Transcription Factors</a></p><blockquote><p>人：2019 BioRxiv 在 DNA 甲基化缺失的细胞中 HDAC 的抑制效果显著增加，DNA甲基化和组蛋白去乙酰化在很大程度上独立地抑制转录因子结合和基因表达<img src="https://github.com/qliugithub/PicGo/blob/master/DNA%E7%94%B2%E5%9F%BA%E5%8C%96%E5%92%8C%E5%8E%BB%E4%B9%99%E9%85%B0%E5%8C%96_%E8%BD%AC%E5%BA%A7%E5%AD%90_%E8%BD%AC%E5%BD%95%E5%9B%A0%E5%AD%90.jpg" alt></p></blockquote></li></ul>]]></content>
     
@@ -49,6 +35,10 @@
     
     </summary>
     
+      <category term="文章" scheme="http://yoursite.com/categories/%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="组蛋白" scheme="http://yoursite.com/tags/%E7%BB%84%E8%9B%8B%E7%99%BD/"/>
     
   </entry>
   
@@ -57,7 +47,7 @@
     <link href="http://yoursite.com/2019/07/18/hello-world/"/>
     <id>http://yoursite.com/2019/07/18/hello-world/</id>
     <published>2019-07-18T11:37:29.656Z</published>
-    <updated>2019-07-18T13:00:07.651Z</updated>
+    <updated>2019-07-18T14:02:43.770Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     
