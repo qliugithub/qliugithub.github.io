@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-20T12:02:38.788Z</updated>
+  <updated>2019-07-21T14:36:18.182Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Qubit 2.0 测 ChIP DNA 浓度</title>
+    <link href="http://yoursite.com/2019/07/21/Qbit-2-0-%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/07/21/Qbit-2-0-使用/</id>
+    <published>2019-07-21T14:04:24.000Z</published>
+    <updated>2019-07-21T14:36:18.182Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="Qubit-2-0-Mix-配置"><a href="#Qubit-2-0-Mix-配置" class="headerlink" title="Qubit 2.0 Mix 配置"></a>Qubit 2.0 Mix 配置</h4><ul><li><strong>DNAHS : HS</strong> = <code>1 : 199</code><ul><li>一个样品一般是 <code>1 ul</code> <strong>DNAHS</strong> + <code>199 ul</code> <strong>HS</strong></li></ul></li><li><strong>DNA : Mix</strong> = <code>1 ：199</code><ul><li>即最后测浓度样本为 <code>1 ul</code> <strong>DNA</strong> + <code>199 ul</code>  <strong>Mix</strong></li></ul></li><li>我们这里需要测了 6 个样本的 DNA 浓度，所以需要配置 <strong>7 * Mix</strong><ul><li><strong>Mix</strong> : <code>7 ul</code> <strong>DNAHS</strong> + <code>1393 ul</code> <strong>HS</strong></li></ul></li><li>每一个样本吸取 <code>1 ul</code> 加入 <code>199 ul</code> <strong>Mix</strong> </li></ul><h4 id="Qubit-2-0-仪器使用"><a href="#Qubit-2-0-仪器使用" class="headerlink" title="Qubit 2.0 仪器使用"></a>Qubit 2.0 仪器使用</h4><ol><li>打开 <strong>Qubit 2.0</strong>  ， 点击 <strong>dsDNA High Sensitivity</strong> 参数。</li><li>在弹出的 界面会询问你是否 <strong>Read new Starndard</strong> ，<strong>Yes</strong> 和 <strong>No</strong> 界面选择 <strong>No</strong> 。</li><li>然后点击 <strong>Calculate Stock ConC</strong> 。</li><li>将样本体积（ <strong>Volume of Sample Used</strong> ）设置为 <strong>1 ul</strong>（ <strong>因为我们只取了 1 ul DNA 加入到 Mix 中进行浓度测定</strong> ），然后就可以看到样品浓度了。</li></ol><h4 id="一张图说明流程"><a href="#一张图说明流程" class="headerlink" title="一张图说明流程"></a>一张图说明流程</h4><p><img src="https://raw.githubusercontent.com/qliugithub/PicGo/master/Qbit%202.0%20%E4%BD%BF%E7%94%A8.png" alt></p><h4 id="最终浓度为"><a href="#最终浓度为" class="headerlink" title="最终浓度为"></a>最终浓度为</h4><table><thead><tr><th align="center">Sample</th><th align="center">浓度（ ng/ul ）</th></tr></thead><tbody><tr><td align="center">ZH</td><td align="center">8.28</td></tr><tr><td align="center">7</td><td align="center">0.29</td></tr><tr><td align="center">CK1</td><td align="center">0.632</td></tr><tr><td align="center">CK2</td><td align="center">0.42</td></tr><tr><td align="center">J1</td><td align="center">0.5</td></tr><tr><td align="center">J2</td><td align="center">0.432</td></tr></tbody></table><p><strong>这浓度。。。。准备重做吧！</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;Qubit-2-0-Mix-配置&quot;&gt;&lt;a href=&quot;#Qubit-2-0-Mix-配置&quot; class=&quot;headerlink&quot; title=&quot;Qubit 2.0 Mix 配置&quot;&gt;&lt;/a&gt;Qubit 2.0 Mix 配置&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;
+      
+    
+    </summary>
+    
+      <category term="实验" scheme="http://yoursite.com/categories/%E5%AE%9E%E9%AA%8C/"/>
+    
+    
+      <category term="ChIP" scheme="http://yoursite.com/tags/ChIP/"/>
+    
+  </entry>
   
   <entry>
     <title>ChIP 实验</title>
