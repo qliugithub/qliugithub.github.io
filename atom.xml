@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-01T13:26:01.659Z</updated>
+  <updated>2019-08-17T09:38:11.777Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ggplot2 绘制热图</title>
+    <link href="http://yoursite.com/2019/08/17/ggplot2-%E7%BB%98%E5%88%B6%E7%83%AD%E5%9B%BE/"/>
+    <id>http://yoursite.com/2019/08/17/ggplot2-绘制热图/</id>
+    <published>2019-08-17T09:36:47.000Z</published>
+    <updated>2019-08-17T09:38:11.777Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="ggplot2-绘制热图"><a href="#ggplot2-绘制热图" class="headerlink" title="ggplot2 绘制热图"></a>ggplot2 绘制热图</h2><ul><li>参考：哪里不会搜哪里，哈哈哈</li><li>其实归根到底就是全文要敲用判断和 <code>paste()</code> 或者 <code>paste0()</code></li><li><code>tidyverse::case_when()</code></li><li><code>factor()</code>: 重定义因子顺序</li><li><a href="https://download.cnet.com/TakeColor/3000-2192_4-10387506.html" target="_blank" rel="noopener">takecolor 下载链接</a></li><li>也可以看我简书 <a href="https://www.jianshu.com/p/7b2c479eddef" target="_blank" rel="noopener">可能是 R 语言最全调色板：Paletteer 包 和 自己慢慢收集</a> 的详细关于配色的操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">library(tidyverse)</span><br><span class="line">library(reshape2)</span><br><span class="line"></span><br><span class="line">a &lt;- matrix(rnorm(90), 9, 10)</span><br><span class="line">colnames(a) &lt;- letters[1:10]</span><br><span class="line">rownames(a) &lt;- letters[1:9]</span><br><span class="line">data &lt;- melt(a)</span><br><span class="line"></span><br><span class="line">data &lt;- data %&gt;%</span><br><span class="line">  mutate(text = case_when(  # 一定要 get 到 case_when() 函数奥秘</span><br><span class="line">    value &gt; 0 ~ paste(round(value, 2), &quot;\n*&quot;), # round() 只保留两位小数</span><br><span class="line">    value &lt;= 0 ~ paste(round(value, 2), &quot;\n**&quot;)))</span><br><span class="line">data$new_Var1 &lt;- factor(data$Var1, levels = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;)) # 重新排序因子，决定坐标轴出图顺序</span><br><span class="line">data$new_Var2 &lt;- factor(data$Var2, levels = rev(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;))) # 同上</span><br><span class="line"></span><br><span class="line">ggplot(data, aes(new_Var1, new_Var2)) +</span><br><span class="line">  geom_tile(aes(fill = value), colour = &quot;grey&quot;, size = 1)+</span><br><span class="line">  scale_fill_gradient2(low = &quot;#5C5DAF&quot;,mid = &quot;white&quot;,high = &quot;#EA2E2D&quot;) + # 这里可以用 windowns 小工具 takecolor 取色，看中哪个文章就吸哪个文章</span><br><span class="line">  # 比如这篇 https://www.nature.com/articles/nmeth.1902</span><br><span class="line">  geom_text(aes(label=text),col =&quot;black&quot;,size = 5) +</span><br><span class="line">  theme_minimal() + # 不要背景</span><br><span class="line">  theme(axis.title.x=element_blank(), # 去掉 title</span><br><span class="line">        axis.ticks.x=element_blank(), # 去掉x 轴</span><br><span class="line">        axis.title.y=element_blank(), # 去掉 y 轴</span><br><span class="line">        axis.text.x = element_text(angle = 45, hjust = 1, size = 14, face = &quot;bold&quot;), # 调整x轴文字，字体加粗</span><br><span class="line">        axis.text.y = element_text(size = 14, face = &quot;bold&quot;)) + #调整y轴文字</span><br><span class="line">  labs(fill =paste0(&quot; * p &lt; 0&quot;,&quot;\n\n&quot;,&quot;** p &gt; 0&quot;,&quot;\n\n&quot;,&quot;Correlation&quot;)) +   # 修改 legend 内容</span><br><span class="line">  scale_x_discrete(position = &quot;top&quot;) # 将 X 轴放置在最上面</span><br></pre></td></tr></table></figure></li></ul><p><img src="https://raw.githubusercontent.com/qliugithub/PicGo/master/ggplot2%E7%BB%98%E5%88%B6%E7%83%AD%E5%9B%BE.png" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;ggplot2-绘制热图&quot;&gt;&lt;a href=&quot;#ggplot2-绘制热图&quot; class=&quot;headerlink&quot; title=&quot;ggplot2 绘制热图&quot;&gt;&lt;/a&gt;ggplot2 绘制热图&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;参考：哪里不会搜哪里，哈哈哈&lt;/li&gt;
+&lt;li&gt;
+      
+    
+    </summary>
+    
+      <category term="R 可视化" scheme="http://yoursite.com/categories/R-%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+      <category term="可视化" scheme="http://yoursite.com/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>我的 hexo next 博客搭建</title>
