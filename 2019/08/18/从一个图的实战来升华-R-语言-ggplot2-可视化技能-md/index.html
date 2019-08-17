@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="首先我是这是我日常逛 twitter 看到的，然后我又是一个搬运工，  放最前面的 链接来源 ： twitter 链接： https://twitter.com/FournierJohanie/status/1161454327296339968 代码链接： ‘bullet graph’ ou graphique à puce    涉及的函数 readr::read_csv dplyr::gli">
+<meta name="keywords" content="可视化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从一个图的实战来升华 R 语言 ggplot2 可视化技能.md">
+<meta property="og:url" content="http://yoursite.com/2019/08/18/从一个图的实战来升华-R-语言-ggplot2-可视化技能-md/index.html">
+<meta property="og:site_name" content="qliu&#39;s blog">
+<meta property="og:description" content="首先我是这是我日常逛 twitter 看到的，然后我又是一个搬运工，  放最前面的 链接来源 ： twitter 链接： https://twitter.com/FournierJohanie/status/1161454327296339968 代码链接： ‘bullet graph’ ou graphique à puce    涉及的函数 readr::read_csv dplyr::gli">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-0610c655bb4f2b40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-e587175f52513a03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-78e0626182d6e4c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-004a2e74bd10b668.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-b07974999cf30cb5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-949981762eb495c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-0b3e329ad34d5f6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-b41db029f17dd9cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-d37a0ea6766579a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-eb291c7f12aa0fc3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-474d2388c21dba36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-364e897867d89b68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-6749fbb02d8195ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-7614fdaf45b69388.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-62591c232d4acaf7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-027a2e0f780f0ecf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6223615-e587175f52513a03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-08-17T16:47:27.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从一个图的实战来升华 R 语言 ggplot2 可视化技能.md">
+<meta name="twitter:description" content="首先我是这是我日常逛 twitter 看到的，然后我又是一个搬运工，  放最前面的 链接来源 ： twitter 链接： https://twitter.com/FournierJohanie/status/1161454327296339968 代码链接： ‘bullet graph’ ou graphique à puce    涉及的函数 readr::read_csv dplyr::gli">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6223615-0610c655bb4f2b40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="qliu's blog" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/18/从一个图的实战来升华-R-语言-ggplot2-可视化技能-md/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>从一个图的实战来升华 R 语言 ggplot2 可视化技能.md | qliu's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">qliu's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">二货潜不学习</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/18/从一个图的实战来升华-R-语言-ggplot2-可视化技能-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="不学生物的二货潜">
+      <meta itemprop="description" content="就是不学习">
+      <meta itemprop="image" content="/images/epigenetics.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="qliu's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从一个图的实战来升华 R 语言 ggplot2 可视化技能.md
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-18 00:39:06 / 修改时间：00:47:27" itemprop="dateCreated datePublished" datetime="2019-08-18T00:39:06+08:00">2019-08-18</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/R-可视化/" itemprop="url" rel="index"><span itemprop="name">R 可视化</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数">15k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">13 分钟</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="首先我是这是我日常逛-twitter-看到的，然后我又是一个搬运工，"><a href="#首先我是这是我日常逛-twitter-看到的，然后我又是一个搬运工，" class="headerlink" title="首先我是这是我日常逛 twitter 看到的，然后我又是一个搬运工，"></a>首先我是这是我日常逛 <strong>twitter</strong> 看到的，然后我又是一个搬运工，</h2><p><img src="https://upload-images.jianshu.io/upload_images/6223615-0610c655bb4f2b40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<ul>
+<li><strong>放最前面的 <code>链接来源</code> ：</strong><ul>
+<li><code>twitter 链接：</code> <a href="https://twitter.com/FournierJohanie/status/1161454327296339968" target="_blank" rel="noopener">https://twitter.com/FournierJohanie/status/1161454327296339968</a></li>
+<li><code>代码链接：</code> <a href="https://johaniefournier.com/2019/08/13/tyt2019w33-bullet-graph-ou-graphique-a-puce/" target="_blank" rel="noopener">‘bullet graph’ ou graphique à puce</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="涉及的函数"><a href="#涉及的函数" class="headerlink" title="涉及的函数"></a>涉及的函数</h2><ul>
+<li><code>readr::read_csv</code></li>
+<li><code>dplyr::glimpse</code>：适合用来查看函数的类信息，<strong>没接触过</strong></li>
+<li><code>mutate() + filter() + select()</code>：简洁方便创建新的数据</li>
+<li><code>geom_bar()</code>：柱状图</li>
+<li><code>geom_segment</code>：自由化画直线条，想画哪里画哪里，这里用来填充图中的蓝色柱子</li>
+<li><code>geom_errorbar()</code>：添加误差线，指定 y 值头到尾即可，这里用来绘制柱子上面的那一条横线</li>
+<li><code>geom_point()</code>：点图，这里用来添加柱子上面的点</li>
+<li><code>coord_flip()</code>：将 xy 轴互换</li>
+<li><code>scale_y_continuous(breaks = seq(0, 80, 10), limits = c(0, 80))</code>：定义 y 轴刻度尺内容（ 即图中展示的 x 轴数字）</li>
+<li><code>expand_limits()</code>：单向扩展阈值，也可以用来指定 xy 轴的范围，这里给后面要添加箭头留白（最上面的那部分空白就是这个函数引起的）</li>
+<li><code>theme()</code>：画板控制，各种参数，具体见正文或者谷歌搜索关键字 <strong>ggplot2 theme</strong></li>
+<li><code>labs()</code>：可以用来修改坐标轴以及标题、副标题等文本信息，这里通过 <strong><code>&quot; &quot;</code></strong> 将内容设置为空</li>
+<li><code>geom_curve</code>：作用与 <code>geom_segment()</code> 相似，只是前者用来画直线，而这里用来绘制曲线，参数 <code>arrow</code> 为箭头</li>
+<li><code>annotate()</code>：可以自由在画板上面添加文本注释信息，想在哪里添加就在哪里添加</li>
+</ul>
+<h2 id="成品图"><a href="#成品图" class="headerlink" title="成品图"></a>成品图</h2><p><img src="https://upload-images.jianshu.io/upload_images/6223615-e587175f52513a03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<blockquote>
+<p><strong>好了接下来就是我复制粘贴的时间了。</strong></p>
+</blockquote>
+<h3 id="一、读取数据"><a href="#一、读取数据" class="headerlink" title="一、读取数据"></a>一、读取数据</h3><ul>
+<li>作者这里为了方便我们大家重现或者说学习此代码（我猜的哈），就把数据放在 <code>github</code> 上面。</li>
+<li>使用 <code>readr</code> 包的 <code>read_csv()</code> 函数读取文件 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">emperors &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-08-13/emperors.csv&quot;)</span><br><span class="line"></span><br><span class="line"># 运行后会出现的结果，我们可以很清楚的看到每一列的信息</span><br><span class="line">Parsed with column specification:</span><br><span class="line">cols(</span><br><span class="line">  index = col_double(),</span><br><span class="line">  name = col_character(),</span><br><span class="line">  name_full = col_character(),</span><br><span class="line">  birth = col_date(format = &quot;&quot;),</span><br><span class="line">  death = col_date(format = &quot;&quot;),</span><br><span class="line">  birth_cty = col_character(),</span><br><span class="line">  birth_prv = col_character(),</span><br><span class="line">  rise = col_character(),</span><br><span class="line">  reign_start = col_date(format = &quot;&quot;),</span><br><span class="line">  reign_end = col_date(format = &quot;&quot;),</span><br><span class="line">  cause = col_character(),</span><br><span class="line">  killer = col_character(),</span><br><span class="line">  dynasty = col_character(),</span><br><span class="line">  era = col_character(),</span><br><span class="line">  notes = col_character(),</span><br><span class="line">  verif_who = col_character()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">dplyr::glimpse(emperors, width = 100)</span><br><span class="line"># 说实话，刚开始看到这个我是不知道在做啥的，然后谷歌，发现这是让我们更直观的去了解我们自己的数据</span><br><span class="line"># width 参数控制输出总字符的宽度</span><br><span class="line"># 可以很清楚的看到有 16 列（变量） 和 68 行</span><br><span class="line">Observations: 68</span><br><span class="line">Variables: 16</span><br><span class="line">$ index       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, ...</span><br><span class="line">$ name        &lt;chr&gt; &quot;Augustus&quot;, &quot;Tiberius&quot;, &quot;Caligula&quot;, &quot;Claudius&quot;, &quot;Nero&quot;, &quot;Galba&quot;, &quot;Otho&quot;, &quot;V...</span><br><span class="line">$ name_full   &lt;chr&gt; &quot;IMPERATOR CAESAR DIVI FILIVS AVGVSTVS&quot;, &quot;TIBERIVS CAESAR DIVI AVGVSTI FILI...</span><br><span class="line">$ birth       &lt;date&gt; 0062-09-23, 0041-11-16, 0012-08-31, 0009-08-01, 0037-12-15, 0002-12-24, 00...</span><br><span class="line">$ death       &lt;date&gt; 0014-08-19, 0037-03-16, 0041-01-24, 0054-10-13, 0068-06-09, 0069-01-15, 00...</span><br><span class="line">$ birth_cty   &lt;chr&gt; &quot;Rome&quot;, &quot;Rome&quot;, &quot;Antitum&quot;, &quot;Lugdunum&quot;, &quot;Antitum&quot;, &quot;Terracina&quot;, &quot;Terentinum&quot;...</span><br><span class="line">$ birth_prv   &lt;chr&gt; &quot;Italia&quot;, &quot;Italia&quot;, &quot;Italia&quot;, &quot;Gallia Lugdunensis&quot;, &quot;Italia&quot;, &quot;Italia&quot;, &quot;It...</span><br><span class="line">$ rise        &lt;chr&gt; &quot;Birthright&quot;, &quot;Birthright&quot;, &quot;Birthright&quot;, &quot;Birthright&quot;, &quot;Birthright&quot;, &quot;Seiz...</span><br><span class="line">$ reign_start &lt;date&gt; 0026-01-16, 0014-09-18, 0037-03-18, 0041-01-25, 0054-10-13, 0068-06-08, 00...</span><br><span class="line">$ reign_end   &lt;date&gt; 0014-08-19, 0037-03-16, 0041-01-24, 0054-10-13, 0068-06-09, 0069-01-15, 00...</span><br><span class="line">$ cause       &lt;chr&gt; &quot;Assassination&quot;, &quot;Assassination&quot;, &quot;Assassination&quot;, &quot;Assassination&quot;, &quot;Suicid...</span><br><span class="line">$ killer      &lt;chr&gt; &quot;Wife&quot;, &quot;Other Emperor&quot;, &quot;Senate&quot;, &quot;Wife&quot;, &quot;Senate&quot;, &quot;Other Emperor&quot;, &quot;Othe...</span><br><span class="line">$ dynasty     &lt;chr&gt; &quot;Julio-Claudian&quot;, &quot;Julio-Claudian&quot;, &quot;Julio-Claudian&quot;, &quot;Julio-Claudian&quot;, &quot;Ju...</span><br><span class="line">$ era         &lt;chr&gt; &quot;Principate&quot;, &quot;Principate&quot;, &quot;Principate&quot;, &quot;Principate&quot;, &quot;Principate&quot;, &quot;Prin...</span><br><span class="line">$ notes       &lt;chr&gt; &quot;birth, reign.start are BCE. Assign negative for correct ISO 8601 dates. Ca...</span><br><span class="line">$ verif_who   &lt;chr&gt; &quot;Reddit user zonination&quot;, &quot;Reddit user zonination&quot;, &quot;Reddit user zonination...</span><br><span class="line"></span><br><span class="line"># 再看看 head 函数， 可以看到横列是反的</span><br><span class="line">head(emperors)</span><br><span class="line"># A tibble: 6 x 16</span><br><span class="line">  index name  name_full birth      death      birth_cty birth_prv rise  reign_start reign_end  cause killer dynasty</span><br><span class="line">  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt; &lt;date&gt;      &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  </span><br><span class="line">1     1 Augu~ IMPERATO~ 0062-09-23 0014-08-19 Rome      Italia    Birt~ 0026-01-16  0014-08-19 Assa~ Wife   Julio-~</span><br><span class="line">2     2 Tibe~ TIBERIVS~ 0041-11-16 0037-03-16 Rome      Italia    Birt~ 0014-09-18  0037-03-16 Assa~ Other~ Julio-~</span><br><span class="line">3     3 Cali~ GAIVS IV~ 0012-08-31 0041-01-24 Antitum   Italia    Birt~ 0037-03-18  0041-01-24 Assa~ Senate Julio-~</span><br><span class="line">4     4 Clau~ TIBERIVS~ 0009-08-01 0054-10-13 Lugdunum  Gallia L~ Birt~ 0041-01-25  0054-10-13 Assa~ Wife   Julio-~</span><br><span class="line">5     5 Nero  NERO CLA~ 0037-12-15 0068-06-09 Antitum   Italia    Birt~ 0054-10-13  0068-06-09 Suic~ Senate Julio-~</span><br><span class="line">6     6 Galba SERVIVS ~ 0002-12-24 0069-01-15 Terracina Italia    Seiz~ 0068-06-08  0069-01-15 Assa~ Other~ Flavian</span><br><span class="line"># ... with 3 more variables: era &lt;chr&gt;, notes &lt;chr&gt;, verif_who &lt;chr&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="二、加载后续所要用的包"><a href="#二、加载后续所要用的包" class="headerlink" title="二、加载后续所要用的包"></a>二、加载后续所要用的包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">library(dplyr) </span><br><span class="line">library(tidyverse)</span><br><span class="line">library(lubridate)  # year() 函数要用</span><br><span class="line">library(ggplot2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、数据处理"><a href="#三、数据处理" class="headerlink" title="三、数据处理"></a>三、数据处理</h3><ul>
+<li><p>插句题外话，这里的 <code>=</code> 对齐，可以用 <a href="https://thinkr-open.github.io/remedy/" target="_blank" rel="noopener">remedy</a> 实现，操作很骚，对于 <strong><code>代码整洁和 Markdown</code></strong> 特别方便</p>
+</li>
+<li><p>不断的利用 <code>mutate()</code> 函数创建新得变量，这里没啥解释的。</p>
+</li>
+<li><p><code>filter()</code>: 各种条件筛选</p>
+</li>
+<li><p><code>select()</code>：选择要输出的列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">data &lt;- emperors %&gt;%</span><br><span class="line">  mutate(annee_naiss = year(birth)) %&gt;%</span><br><span class="line">  mutate(annee_mort  = year(death)) %&gt;%</span><br><span class="line">  mutate(annee_deb   = year(reign_start)) %&gt;%</span><br><span class="line">  mutate(annee_fin   = year(reign_end)) %&gt;%</span><br><span class="line">  mutate(age_mort    = abs(annee_mort - annee_naiss)) %&gt;%</span><br><span class="line">  mutate(age_deb     = abs(annee_deb - annee_naiss)) %&gt;%</span><br><span class="line">  mutate(age_fin     = abs(annee_fin - annee_naiss)) %&gt;%</span><br><span class="line">  mutate(duree       = abs(age_fin - age_deb)) %&gt;%</span><br><span class="line">  mutate(remove      = ifelse(age_deb == age_mort, &apos;retirer&apos;, NA)) %&gt;%</span><br><span class="line">  filter(!age_mort %in% NA, !age_deb %in% NA, !age_fin %in% NA,</span><br><span class="line">         !age_mort %in% 4, !remove %in% &quot;retirer&quot;) %&gt;%</span><br><span class="line">  select(name, age_deb, age_fin, age_mort, duree)</span><br><span class="line"></span><br><span class="line"># 简单查看一下数据</span><br><span class="line">dplyr::glimpse(data, width = 100)</span><br><span class="line">Observations: 51</span><br><span class="line">Variables: 5</span><br><span class="line">$ name     &lt;chr&gt; &quot;Augustus&quot;, &quot;Caligula&quot;, &quot;Claudius&quot;, &quot;Nero&quot;, &quot;Galba&quot;, &quot;Vespasian&quot;, &quot;Titus&quot;, &quot;Do...</span><br><span class="line">$ age_deb  &lt;dbl&gt; 36, 25, 32, 17, 66, 60, 40, 30, 66, 45, 41, 52, 40, 31, 16, 48, 10, 20, 52, 15...</span><br><span class="line">$ age_fin  &lt;dbl&gt; 48, 29, 45, 31, 67, 70, 42, 45, 68, 64, 62, 75, 59, 39, 31, 66, 29, 22, 53, 19...</span><br><span class="line">$ age_mort &lt;dbl&gt; 48, 29, 45, 31, 67, 70, 42, 45, 68, 64, 62, 75, 59, 39, 31, 66, 29, 22, 53, 19...</span><br><span class="line">$ duree    &lt;dbl&gt; 12, 4, 13, 14, 1, 10, 2, 15, 2, 19, 21, 23, 19, 8, 15, 18, 19, 2, 1, 4, 13, 3,..</span><br><span class="line"></span><br><span class="line"># 还是比较喜欢 head 来展示</span><br><span class="line">head(data)</span><br><span class="line"># A tibble: 6 x 5</span><br><span class="line">  name      age_deb age_fin age_mort duree</span><br><span class="line">  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;</span><br><span class="line">1 Augustus       36      48       48    12</span><br><span class="line">2 Caligula       25      29       29     4</span><br><span class="line">3 Claudius       32      45       45    13</span><br><span class="line">4 Nero           17      31       31    14</span><br><span class="line">5 Galba          66      67       67     1</span><br><span class="line">6 Vespasian      60      70       70    10</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="四、画图（重头戏）"><a href="#四、画图（重头戏）" class="headerlink" title="四、画图（重头戏）"></a>四、画图（重头戏）</h3><blockquote>
+<p>为了说明可视化不断修整过程，我将分开展示</p>
+</blockquote>
+<h4 id="1、-geom-bar-函数绘制-柱状图"><a href="#1、-geom-bar-函数绘制-柱状图" class="headerlink" title="1、 geom_bar() 函数绘制 柱状图"></a>1、 <code>geom_bar()</code> 函数绘制 柱状图</h4><ul>
+<li><strong>1、</strong> 就是一个简单的柱状图<blockquote>
+<p>参数说明：</p>
+<ul>
+<li><code>stat = identity</code> : 绘图函数 <code>stat</code> 的参数，用来对样本进行统计，默认为 <code>identity</code>，表示一个 x 对应一个 y，即横坐标 x 在数据中对应的 y 值；同时可以是 <code>bin</code> 表示对一个 x 对应落在 x 里面的数，即统计频数，官方说明书 <a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" target="_blank" rel="noopener">geom_bar.html</a><ul>
+<li><code>stat</code> 函数有 <code>stat_bin()</code> 、 <code>stat_count()</code> 、<code>stat_density()</code>、<code>stat_bin_2d()</code>、<code>stat_bind_hex()</code>、<code>stat_density_2d()</code>、<code>stat_ellipse()</code>、<code>stat_contour()</code>、<code>stat_summary_hex()</code>、<code>stat_summary_2d()</code>、<code>stat_boxplot()</code>、<code>stat_ydensity()</code>、<code>stat_ecdf()</code>、 <code>stat_quantile()</code>、<code>stat_smooth()</code>、  <code>stat_qq()</code>、<code>stat_summary(fun.data = &quot;mean_cl_boot&quot;)</code>、<code>stat_summary_bin(fun.y = &quot;mean&quot;, geom = &quot;bar&quot;)</code>、<code>stat_unique()</code> 等，<strong>最重要的是还可以自定函数 <code>stat_function(aes(x = -3:3), n = 99, fun = dnorm, args = list(sd=0.5))</code></strong>，详情见 <a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank" rel="noopener">ggplot2 cheat sheet</a>，有时间要好好看下每一个对应的功能。</li>
+</ul>
+</li>
+<li><code>position = stack</code>: 用 <code>Cheat sheet</code> 里面内容展示，一目了然。<code>stack</code> 表示堆积，<code>dodge</code> 表示分开，<code>fill</code> 表示百分比填充，<code>jitter</code> 表示散点图抖动，<code>nudge</code> 表示注释信息远离点。<br><img src="https://upload-images.jianshu.io/upload_images/6223615-78e0626182d6e4c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- ggplot(data, aes(x = reorder(name, -age_mort), y = age_mort))  </span><br><span class="line">gg &lt;- gg + </span><br><span class="line">  geom_bar(stat          = &quot;identity&quot;, position = &quot;stack&quot;, width = 0.65, </span><br><span class="line">           fill          = &quot;#6D7C83&quot;, alpha = 0.4)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-004a2e74bd10b668.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="2、geom-segment-函数来画直线"><a href="#2、geom-segment-函数来画直线" class="headerlink" title="2、geom_segment() 函数来画直线"></a>2、<code>geom_segment()</code> 函数来画直线</h4><ul>
+<li><strong>2、</strong> 通过 <code>geom_segment()</code> 函数来画直线, 因为这里是表示柱子，可以理解为线条，主要要指定 x 对应的那一根柱子，然后再指定纵向即 Y 轴的起始 <code>age_deb</code> 和 终止 <code>age_fin</code> 坐标即可，<code>size = 2.3</code> 制定柱子的宽度，不宜太大，然后涂上颜色。<blockquote>
+<p>至于这个函数式做什么的呢？就是你提供一个四边形的区间，你就可以画出一个四边形，详情可以参考 <strong><code>杜雨</code></strong>老师写的一篇超级棒的素材 <a href="https://zhuanlan.zhihu.com/p/37072513" target="_blank" rel="noopener">ggplot2 都有哪些使用不多但是却异常强大的图层函数</a><br>引用其中一句话 <code>geom_segment 通常用于制作直线段图，路径图、放射线图等，思路也很简单，只需要指定每一条线段的起点坐标、终点坐标即可。即分别制定 x,y,xend,yend</code></p>
+<ul>
+<li>后面会涉及一个函数 <code>geom_curve()</code> 用来画弧线，用官方 <a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" target="_blank" rel="noopener">geom_segment</a> 一张图说明<br><img src="https://upload-images.jianshu.io/upload_images/6223615-b07974999cf30cb5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg + </span><br><span class="line">  geom_segment(aes(y    = age_deb, x = name,</span><br><span class="line">                   yend = age_fin, xend = name),</span><br><span class="line">               color    = &quot;#175676&quot;, size = 2.3, alpha = 0.8)  # size = 2.3 制定柱子的宽度，不宜太大</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-949981762eb495c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="3、geom-errorbar-加上误差线"><a href="#3、geom-errorbar-加上误差线" class="headerlink" title="3、geom_errorbar() 加上误差线"></a>3、<code>geom_errorbar()</code> 加上误差线</h4><ul>
+<li><strong>3、</strong> <code>geom_errorbar()</code> 加上误差线，这里起始并不是真正的加上误差线，给我感觉就是在每个柱子最上放划一道横线。用上面的函数 <code>geom_segment()</code> 也可以做到。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg + </span><br><span class="line">  geom_errorbar(aes(y    = age_mort, x = name, </span><br><span class="line">                    ymin = age_mort, ymax = age_mort),</span><br><span class="line">                color    = &quot;black&quot;, width = 0.85)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-0b3e329ad34d5f6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="4、-geom-point-函数加上散点图"><a href="#4、-geom-point-函数加上散点图" class="headerlink" title="4、 geom_point() 函数加上散点图"></a>4、 <code>geom_point()</code> 函数加上散点图</h4><ul>
+<li><strong>4、</strong>  通过 <code>geom_point()</code> 函数加上散点图（ <code>仔细看柱子顶端中间多了一个点</code> ），并且通过 <code>coord_flip()</code> 函数将 X 和 Y 轴进行交换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg + geom_point(aes(name, age_mort), </span><br><span class="line">                      colour = &quot;black&quot;, size = 1)  # 我将原文 0.75 改成了 1 ，这样点的效果好点</span><br><span class="line">gg &lt;- gg + coord_flip()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-b41db029f17dd9cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>0)</p>
+<h4 id="5、-scale-y-continuous-函数调整-y-坐标轴刻度尺的内容和范围"><a href="#5、-scale-y-continuous-函数调整-y-坐标轴刻度尺的内容和范围" class="headerlink" title="5、 scale_y_continuous() 函数调整 y 坐标轴刻度尺的内容和范围"></a>5、 <code>scale_y_continuous()</code> 函数调整 y 坐标轴刻度尺的内容和范围</h4><ul>
+<li><strong>5、</strong>  <code>scale_y_continuous()</code> 函数调整 y 坐标轴刻度尺的内容和范围，注意因为我们是通过函数 <code>coord_flip()</code> 将 xy 轴交换了，但是修改参数的时候，仍然要对应之前的坐标轴。<ul>
+<li><code>scale_y_continuous()</code> 函数，指定 y 轴刻度尺标签，<code>breaks</code> 展示需要的内容，<code>limits</code> 指定 y 轴的范围。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg + scale_y_continuous(breaks = seq(0, 80, 10), </span><br><span class="line">                              limits = c(0, 80)) </span><br><span class="line"></span><br><span class="line">seq(0, 80, 10)</span><br><span class="line">[1]  0 10 20 30 40 50 60 70 80</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-d37a0ea6766579a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="6、expand-limits-函数可以用来单向扩展阈值"><a href="#6、expand-limits-函数可以用来单向扩展阈值" class="headerlink" title="6、expand_limits() 函数可以用来单向扩展阈值"></a>6、<code>expand_limits()</code> 函数可以用来单向扩展阈值</h4><ul>
+<li><strong>6、</strong>  <code>expand_limits()</code> 函数可以用来单向扩展阈值，也可以用来指定 xy 轴的范围，这里给后面要添加箭头留白。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg + expand_limits(x = c(0, 56)) # 没咋理解这一步加不加有啥区别，先操作，再回来解释</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-eb291c7f12aa0fc3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="7、-theme-函数来调整主题"><a href="#7、-theme-函数来调整主题" class="headerlink" title="7、 theme() 函数来调整主题"></a>7、 <code>theme()</code> 函数来调整主题</h4><ul>
+<li><p><strong>7、</strong> 通过 <code>theme()</code> 函数来调整主题，决定哪些显示哪些不显示</p>
+<ul>
+<li><p><a href="https://ggplot2.tidyverse.org/reference/theme.html" target="_blank" rel="noopener">theme 官方参数详解</a></p>
+</li>
+<li><p><a href="http://www.rpubs.com/lihaoyi/156592" target="_blank" rel="noopener">ggplot2主题设置</a></p>
+</li>
+<li><p><code>theme()</code> 函数参数详解，来源：<a href="https://www.jianshu.com/p/3ec860e87832" target="_blank" rel="noopener">ggplot2 学习笔记系列之主题（theme）设置</a></p>
+</li>
+<li><p><strong>这个应该是中文相对详细的：</strong> <a href="https://blog.csdn.net/u014801157/article/details/24372531" target="_blank" rel="noopener">ggplot2 作图详解 7（完）：主题（theme）设置</a></p>
+</li>
+<li><p>搜关键词 <strong>ggplot2 theme</strong> ， 一堆供你参考<br><img src="https://upload-images.jianshu.io/upload_images/6223615-474d2388c21dba36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<blockquote>
+<p>记住几个主要的吧</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">参数	设置内容	继承自</span><br><span class="line">line	所有线属性	 </span><br><span class="line">rect	所有矩形区域属性	 </span><br><span class="line">text	所有文本相关属性	 </span><br><span class="line">title	所有标题属性	 </span><br><span class="line">axis.title	坐标轴标题	</span><br><span class="line">axis.title.x	x 轴属性	axis.title</span><br><span class="line">axis.title.y	y 轴属性	axis.title</span><br><span class="line">axis.text	坐标轴刻度标签属性	 	 </span><br><span class="line">axis.ticks	坐标轴刻度线	 </span><br><span class="line">axis.ticks.length	刻度线长度	 </span><br><span class="line">axis.ticks.margin	刻度线和刻度标签之间的间距	 </span><br><span class="line">axis.line	坐标轴线		 </span><br><span class="line">legend.background	图例背景	</span><br><span class="line">legend.margin	图例边界	 </span><br><span class="line">legend.key	图例符号	 </span><br><span class="line">legend.key.size	图例符号大小	 </span><br><span class="line">legend.key.height	图例符号高度	 </span><br><span class="line">legend.key.width	图例符号宽度	 </span><br><span class="line">legend.text	图例文字标签	 </span><br><span class="line">legend.text.align	图例文字标签对齐方式	0 为左齐，1 为右齐</span><br><span class="line">legend.title	图例标题	text</span><br><span class="line">legend.title.align	图例标题对齐方式	 </span><br><span class="line">legend.position	图例位置	left, right, bottom, top, 两数字向量</span><br><span class="line">legend.direction	图例排列方向	&quot;horizontal&quot; or &quot;vertical&quot;</span><br><span class="line">legend.justification	居中方式	center 或两数字向量</span><br><span class="line">legend.box	多图例的排列方式	&quot;horizontal&quot; or &quot;vertical&quot;</span><br><span class="line">legend.box.just	多图例居中方式	 </span><br><span class="line">panel.background	绘图区背景	</span><br><span class="line">panel.border	绘图区边框	</span><br><span class="line">panel.margin	分面绘图区之间的边距	 </span><br><span class="line">panel.grid	绘图区网格线	</span><br><span class="line">panel.grid.major	主网格线	 </span><br><span class="line">panel.grid.minor	次网格线	  	 </span><br><span class="line">plot.background	整个图形的背景	 </span><br><span class="line">plot.title	图形标题	 </span><br><span class="line">plot.margin	图形边距	top, right, bottom, left</span><br><span class="line">strip.background	分面标签背景</span><br><span class="line">strip.text	分面标签文本</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg +  theme(panel.border       = element_blank(), # 绘图区边框</span><br><span class="line">                  panel.background   = element_blank(), # 绘图区背景，这里会变成纯白，没有灰色背景</span><br><span class="line">                  plot.background    = element_blank(), # 整个图形的背景</span><br><span class="line">                  panel.grid.major.x = element_line(size = 0.2,linetype = &quot;dotted&quot;, color = &quot;#6D7C83&quot;), # 垂直 x 轴的主网格线的类型、粗细、以及颜色</span><br><span class="line">                  panel.grid.major.y = element_blank(), # 同上，只不过这里选择为空，不显示这条线，其实有点多余，本身就没有这里</span><br><span class="line">                  panel.grid.minor   = element_blank(), # 次网格线</span><br><span class="line">                  axis.line.x        = element_blank(), # 坐标轴线 x</span><br><span class="line">                  axis.line.y        = element_blank(), # 坐标轴线 y</span><br><span class="line">                  axis.ticks.y       = element_blank(), # 坐标轴 y 刻度线</span><br><span class="line">                  axis.ticks.x       = element_blank())  # 坐标轴 x 刻度线</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-364e897867d89b68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="8、-labs-函数来修改所有标签内容"><a href="#8、-labs-函数来修改所有标签内容" class="headerlink" title="8、 labs() 函数来修改所有标签内容"></a>8、 <code>labs()</code> 函数来修改所有标签内容</h4><ul>
+<li><strong>8、</strong> 通过 <code>labs()</code> 函数来修改所有标签内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg + labs(title  = &quot; &quot;,</span><br><span class="line">              subtitle = &quot;&quot;,</span><br><span class="line">              y        = &quot; &quot;,</span><br><span class="line">              x        = &quot; &quot;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-6749fbb02d8195ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="9、-theme-函数来修改所有坐标轴刻度尺内容"><a href="#9、-theme-函数来修改所有坐标轴刻度尺内容" class="headerlink" title="9、 theme() 函数来修改所有坐标轴刻度尺内容"></a>9、 <code>theme()</code> 函数来修改所有坐标轴刻度尺内容</h4><ul>
+<li><strong>9、</strong> 通过 <code>theme()</code> 函数来修改所有坐标轴刻度尺内容，可以看到 xy 轴刻度尺的字体和颜色都改变了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg + theme(plot.title    = element_blank(),</span><br><span class="line">               plot.subtitle   = element_blank(),</span><br><span class="line">               axis.title.y    = element_blank(),</span><br><span class="line">               axis.title.x    = element_blank(),</span><br><span class="line">               axis.text.y     = element_text(hjust = 1, vjust = 0.5, size = 12,</span><br><span class="line">                                              color = &quot;#6D7C83&quot;, face = &quot;bold&quot;),</span><br><span class="line">               axis.text.x     = element_text(hjust = 0.5, vjust = 0, size = 12,</span><br><span class="line">                                              color = &quot;#6D7C83&quot;, face = &quot;bold&quot;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-7614fdaf45b69388.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="10、geom-curve-函数用来画弧线，来实现图中的箭头标志"><a href="#10、geom-curve-函数用来画弧线，来实现图中的箭头标志" class="headerlink" title="10、geom_curve() 函数用来画弧线，来实现图中的箭头标志"></a>10、<code>geom_curve()</code> 函数用来画<strong>弧线</strong>，来实现图中的<strong>箭头标志</strong></h4><ul>
+<li><strong>10、</strong> 通过 <code>geom_curve()</code> 函数用来画<strong>弧线</strong>，来实现图中的<strong>箭头标志</strong>，这里我们可以看出来前面的函数 <code>expand_limits()</code> 是为了给这里的箭头留白。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 制备箭头的坐标</span><br><span class="line">arrows &lt;- tibble(    </span><br><span class="line">  x1 = c(50, 16, 53.5, 53.5, 53.5),    </span><br><span class="line">  x2 = c(49, 15,   51,   51,   51),    </span><br><span class="line">  y1 = c(35, 70,    5,   25,   40),    </span><br><span class="line">  y2 = c(22, 61,    0,   13,   19)  </span><br><span class="line">) </span><br><span class="line"></span><br><span class="line"># 添加箭头</span><br><span class="line">gg &lt;- gg +    </span><br><span class="line">  geom_curve(data                  = arrows, </span><br><span class="line">                         aes(x     = x1, y = y1, xend = x2, yend = y2),</span><br><span class="line">                         arrow     = arrow(length = unit(0.1, &quot;inch&quot;)),</span><br><span class="line">                         size      = 0.3, </span><br><span class="line">                         color     = &quot;#6D7C83&quot;,</span><br><span class="line">                         curvature = -0.3)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-62591c232d4acaf7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="11、annotate-函数在图上加一点文本注释"><a href="#11、annotate-函数在图上加一点文本注释" class="headerlink" title="11、annotate() 函数在图上加一点文本注释"></a>11、<code>annotate()</code> 函数在图上加一点文本注释</h4><ul>
+<li><strong>11、</strong> 使用 <code>annotate()</code> 函数在图上加一点文本注释，从这里可以发现作者全文的颜色都是统一的。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg + </span><br><span class="line">  annotate(geom  = &quot;text&quot;, x = 50, y = 35, label = &quot;Le plus jeune à\ndevenir Empereur&quot;, </span><br><span class="line">           color = &quot;#6D7C83&quot;, size=3, hjust = 0, vjust = 0.5, fontface = &quot;bold&quot;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-027a2e0f780f0ecf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h4 id="12、annotate-函数在图上其它几处加一点文本注释"><a href="#12、annotate-函数在图上其它几处加一点文本注释" class="headerlink" title="12、annotate() 函数在图上其它几处加一点文本注释"></a>12、<code>annotate()</code> 函数在图上其它几处加一点文本注释</h4><ul>
+<li><strong>12、</strong>   使用 <code>annotate()</code> 函数在图上其它几处加文本注释<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">gg &lt;- gg +</span><br><span class="line">  annotate(geom          = &quot;text&quot;, x = 18, y = 70, label = &quot;Son reigne\na pris fin\navant\nson décès&quot;, </span><br><span class="line">           color         = &quot;#6D7C83&quot;, size = 3, hjust = 0.5, vjust = 0.5, fontface = &quot;bold&quot;)  </span><br><span class="line"></span><br><span class="line">gg &lt;- gg + </span><br><span class="line">  annotate(geom          = &quot;text&quot;, x = 54,y = 5, label = &quot;Naissance&quot;, </span><br><span class="line">           color         = &quot;#6D7C83&quot;, size = 3, hjust = 0.5,vjust = 0.5, fontface = &quot;bold&quot;)  </span><br><span class="line"></span><br><span class="line">gg &lt;- gg + annotate(geom = &quot;text&quot;, x = 55, y = 25, label = &quot;Début du\nreigne&quot;,</span><br><span class="line">                  color  = &quot;#6D7C83&quot;, size = 3, hjust = 0.5,vjust = 0.8, fontface = &quot;bold&quot;)</span><br><span class="line"></span><br><span class="line">gg &lt;- gg + annotate(geom = &quot;text&quot;, x = 54,y = 40, label = &quot;Décès&quot;,</span><br><span class="line">                  color  = &quot;#6D7C83&quot;, size = 3, hjust = 0.5,vjust = 0.5, fontface = &quot;bold&quot;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/6223615-e587175f52513a03.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></p>
+<h2 id="我的膝盖现在还疼，为啥？我跪着学完的。"><a href="#我的膝盖现在还疼，为啥？我跪着学完的。" class="headerlink" title="我的膝盖现在还疼，为啥？我跪着学完的。"></a>我的膝盖现在还疼，为啥？我跪着学完的。</h2>
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/可视化/" rel="tag"><i class="fa fa-tag"></i> 可视化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/17/ggplot2-绘制热图/" rel="next" title="ggplot2 绘制热图">
+                <i class="fa fa-chevron-left"></i> ggplot2 绘制热图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NTM4OS8yMTkwMQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/epigenetics.png" alt="不学生物的二货潜">
+  
+  <p class="site-author-name" itemprop="name">不学生物的二货潜</p>
+  <div class="site-description motion-element" itemprop="description">就是不学习</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/qliugithub" title="GitHub &rarr; https://github.com/qliugithub" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://twitter.com/BioQliu" title="Twitter &rarr; https://twitter.com/BioQliu" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.jianshu.com/u/ab6dcc5b9d97" title="简书 &rarr; https://www.jianshu.com/u/ab6dcc5b9d97" rel="noopener" target="_blank"><i class="fa fa-fw fa-car"></i>简书</a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先我是这是我日常逛-twitter-看到的，然后我又是一个搬运工，"><span class="nav-number">1.</span> <span class="nav-text">首先我是这是我日常逛 twitter 看到的，然后我又是一个搬运工，</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#涉及的函数"><span class="nav-number">2.</span> <span class="nav-text">涉及的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成品图"><span class="nav-number">3.</span> <span class="nav-text">成品图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、读取数据"><span class="nav-number">3.1.</span> <span class="nav-text">一、读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、加载后续所要用的包"><span class="nav-number">3.2.</span> <span class="nav-text">二、加载后续所要用的包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、数据处理"><span class="nav-number">3.3.</span> <span class="nav-text">三、数据处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、画图（重头戏）"><span class="nav-number">3.4.</span> <span class="nav-text">四、画图（重头戏）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、-geom-bar-函数绘制-柱状图"><span class="nav-number">3.4.1.</span> <span class="nav-text">1、 geom_bar() 函数绘制 柱状图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、geom-segment-函数来画直线"><span class="nav-number">3.4.2.</span> <span class="nav-text">2、geom_segment() 函数来画直线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、geom-errorbar-加上误差线"><span class="nav-number">3.4.3.</span> <span class="nav-text">3、geom_errorbar() 加上误差线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、-geom-point-函数加上散点图"><span class="nav-number">3.4.4.</span> <span class="nav-text">4、 geom_point() 函数加上散点图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、-scale-y-continuous-函数调整-y-坐标轴刻度尺的内容和范围"><span class="nav-number">3.4.5.</span> <span class="nav-text">5、 scale_y_continuous() 函数调整 y 坐标轴刻度尺的内容和范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、expand-limits-函数可以用来单向扩展阈值"><span class="nav-number">3.4.6.</span> <span class="nav-text">6、expand_limits() 函数可以用来单向扩展阈值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、-theme-函数来调整主题"><span class="nav-number">3.4.7.</span> <span class="nav-text">7、 theme() 函数来调整主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、-labs-函数来修改所有标签内容"><span class="nav-number">3.4.8.</span> <span class="nav-text">8、 labs() 函数来修改所有标签内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、-theme-函数来修改所有坐标轴刻度尺内容"><span class="nav-number">3.4.9.</span> <span class="nav-text">9、 theme() 函数来修改所有坐标轴刻度尺内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10、geom-curve-函数用来画弧线，来实现图中的箭头标志"><span class="nav-number">3.4.10.</span> <span class="nav-text">10、geom_curve() 函数用来画弧线，来实现图中的箭头标志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11、annotate-函数在图上加一点文本注释"><span class="nav-number">3.4.11.</span> <span class="nav-text">11、annotate() 函数在图上加一点文本注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12、annotate-函数在图上其它几处加一点文本注释"><span class="nav-number">3.4.12.</span> <span class="nav-text">12、annotate() 函数在图上其它几处加一点文本注释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的膝盖现在还疼，为啥？我跪着学完的。"><span class="nav-number">4.</span> <span class="nav-text">我的膝盖现在还疼，为啥？我跪着学完的。</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不学生物的二货潜</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">39k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">35 分钟</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+
+<script>
+  window.livereOptions = {
+    refer: '2019/08/18/从一个图的实战来升华-R-语言-ggplot2-可视化技能-md/'
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+  <script type="text/javascript">
+/* 鼠标特效 */
+var a_idx = 0;
+jQuery(document).ready(function($) {
+   $("body").click(function(e) {
+       var a = new Array("我", "真的", "不", "不喜欢", "生物", "不做实验", "不当咸鱼");
+       var $i = $("<span/>").text(a[a_idx]);
+       a_idx = (a_idx + 1) % a.length;
+       var x = e.pageX,
+       y = e.pageY;
+       $i.css({
+           "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+           "top": y - 20,
+           "left": x,
+           "position": "absolute",
+           "font-weight": "bold",
+           "color": "#ff6651"
+       });
+       $("body").append($i);
+       $i.animate({
+           "top": y - 180,
+           "opacity": 0
+       },
+       1500,
+       function() {
+           $i.remove();
+       });
+   });
+});
+    </script>
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-hijiki"},"display":{"position":"right","width":15,"height":30},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
